@@ -9,17 +9,10 @@ public class ArbolGenero {
 		this.root = null;
 	}
 
-	public String getRoot() {
-		if (this.root != null)
-			return this.root.getGenero();
-		else
-			return null;
+	//Buscador por genero para acceder desde el main
+	public NodoGenero buscarGenero(String genero) {
+		return buscarGenero(this.root, genero);
 	}
-
-	// Buscador por genero
-	public NodoGenero buscarGenero(String genero) { // Se puede crear un metodo parecido pero sin el add en el private
-		return buscarGenero(this.root, genero); // para que no puedan crear nodos con cualquier cosa desde afuera
-	} // al realizar las busquedas
 
 	private NodoGenero buscarGenero(NodoGenero nodo, String genero) {
 		if (nodo != null) {
@@ -30,32 +23,30 @@ public class ArbolGenero {
 			else
 				return this.buscarGenero(nodo.getHijoder(), genero);
 		}
-		NodoGenero aux = this.add(genero);
+		NodoGenero aux = new NodoGenero("Género no encontrado");
 		return aux;
 	}
 
-	// hasElem
-//	public boolean hasElem(String genero) {
-//		return this.hasElem(this.root, genero);
-//	}
-//
-//	private boolean hasElem(NodoGenero nodo, String genero) {
-//		if (nodo != null) {
-//			if (nodo.getGenero() == genero)
-//				return true;
-//			else if (nodo.getGenero().compareTo(genero) > 0)
-//				return this.hasElem(nodo.getHijoizq(), genero);
-//			else
-//				return this.hasElem(nodo.getHijoder(), genero);
-//		}
-//		return false;
-//	}
+	//Buscador por genero para crear el indice. Ver si vale la pena ponerlos por separado o no.
+	//Este genera un nodo con el string ingresado si es que no lo encuentra, y lo agrega al arbol.
+	//No puede accederse desde el main a traves del indice.
+	protected NodoGenero buscarGeneroInterno(String genero) {
+		return buscarGeneroInterno(this.root, genero);
+	}
 
-	// isEmpty
-//	public boolean isEmpty() {
-//		return (this.root == null);
-//	}
-
+	private NodoGenero buscarGeneroInterno(NodoGenero nodo, String genero) {
+		if (nodo != null) {
+			if (nodo.getGenero().equals(genero)) {
+				return nodo;
+			} else if (nodo.getGenero().compareTo(genero) > 0)
+				return this.buscarGeneroInterno(nodo.getHijoizq(), genero);
+			else
+				return this.buscarGeneroInterno(nodo.getHijoder(), genero);
+		}
+		NodoGenero aux = this.add(genero);
+		return aux;
+	}
+	
 	// add
 	public NodoGenero add(String genero) {
 		if (this.root == null) {
@@ -67,14 +58,14 @@ public class ArbolGenero {
 	}
 
 	private NodoGenero add(NodoGenero nodo, String genero) {
-		if (nodo.getGenero().compareTo(genero) > 0) { // Para chequear < o > porque suelo pifiarle
+		if (nodo.getGenero().compareTo(genero) > 0) {
 			if (nodo.getHijoizq() == null) {
 				NodoGenero tmp = new NodoGenero(genero);
 				nodo.setHijoizq(tmp);
 			} else {
 				this.add(nodo.getHijoizq(), genero);
 			}
-		} else if (nodo.getGenero().compareTo(genero) < 0) { // Chequear signo del compareTo
+		} else if (nodo.getGenero().compareTo(genero) < 0) {
 			if (nodo.getHijoder() == null) {
 				NodoGenero tmp = new NodoGenero(genero);
 				nodo.setHijoder(tmp);
@@ -83,36 +74,6 @@ public class ArbolGenero {
 			}
 		}
 		return nodo;
-	}
-
-	// void printPosOrder()
-
-	public void printPosOrder() {
-		this.printPosOrder(this.root);
-	}
-
-	private void printPosOrder(NodoGenero node) {
-		if (node != null) {
-			printPosOrder(node.getHijoizq());
-			printPosOrder(node.getHijoizq());
-			System.out.println(node);
-		}
-	}
-
-	// void printPreOrder()
-
-	public void printPreOrder() {
-		printPreOrder(this.root);
-	}
-
-	private void printPreOrder(NodoGenero node) {
-		if (node != null) {
-			System.out.println(node);
-			printPreOrder(node.getHijoizq());
-			printPreOrder(node.getHijoder());
-		} else {
-			System.out.println("- ");
-		}
 	}
 
 	// void printInOrder()
