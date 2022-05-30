@@ -1,5 +1,7 @@
 package tpe;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ArbolGenero {
 	private NodoGenero root;
@@ -17,7 +19,11 @@ public class ArbolGenero {
 
 	// Buscador por genero
 	public NodoGenero buscarGenero(String genero) {
-		return this.buscarGenero(this.root, genero);
+		NodoGenero aux = new NodoGenero("");
+		if (this.hasElem(genero))
+			return this.buscarGenero(this.root, genero);
+		else
+			return aux;
 	}
 
 	private NodoGenero buscarGenero(NodoGenero nodo, String genero) {
@@ -82,72 +88,6 @@ public class ArbolGenero {
 		}
 	}
 
-	// delete
-	public boolean delete(String genero) {
-		return this.delete(this.root, genero);
-	}
-
-	private boolean delete(NodoGenero nodo, String genero) {
-		NodoGenero aux = nodo;
-		NodoGenero padre = nodo;
-		boolean esHijoizq = true;
-
-		while (aux.getGenero() != genero) {
-			padre = aux;
-			if (aux.getGenero().compareTo(genero) > 0) { // Chequear signo del compareTo
-				aux = aux.getHijoizq();
-				esHijoizq = true;
-			} else {
-				aux = aux.getHijoder();
-				esHijoizq = false;
-			}
-			if (aux == null)
-				return false;
-		} // sale del while con aux = al valor que estoy buscando
-			// si es que lo encontró, sino retorne falso
-
-		// CASO 1 ES HOJA
-		if (aux.getHijoizq() == null && aux.getHijoder() == null) {
-			if (aux == this.root)
-				this.root = null;
-			else if (esHijoizq)
-				padre.setHijoizq(null);
-			else
-				padre.setHijoder(null);
-		}
-
-		// CASO 2 TIENE UN HIJO
-		else if (aux.getHijoizq() != null && aux.getHijoder() == null) {
-			if (aux == this.root)
-				this.root = aux.getHijoizq();
-			else
-				padre.setHijoder(aux.getHijoizq());
-		} else if (aux.getHijoizq() == null && aux.getHijoder() != null) {
-			if (aux == this.root)
-				this.root = aux.getHijoder();
-			else
-				padre.setHijoder(aux.getHijoder());
-		}
-
-		// CASO 3 TIENE DOS HIJOS
-		else {
-			// buscar NMI del arbol derecho
-			String nmi = buscarNMIarbolDerecho(aux);
-			delete(aux, nmi);
-			aux.setGenero(nmi);
-		}
-		return true;
-	}
-
-	public String buscarNMIarbolDerecho(NodoGenero nodo) {
-		NodoGenero aux = nodo.getHijoder();
-		String nmi = aux.getGenero();
-		while (aux.getHijoizq() != null) {
-			nmi = aux.getHijoizq().getGenero();
-			aux = aux.getHijoizq();
-		}
-		return nmi;
-	}
 
 	// void printPosOrder()
 
@@ -188,9 +128,15 @@ public class ArbolGenero {
 	private void printInOrder(NodoGenero node) {
 		if (node != null) {
 			printInOrder(node.getHijoizq());
-			System.out.println(node.getGenero());
+			System.out.print(node.getGenero() + " ");
+			ArrayList<String> libros = node.getLibros();
+			for (String libro: libros) {
+				System.out.print(libro + " ");
+			}
+			System.out.println("");
 			printInOrder(node.getHijoder());
 		}
 	}
-
+	
+	
 }

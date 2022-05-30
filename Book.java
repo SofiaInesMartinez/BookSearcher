@@ -44,8 +44,7 @@ public class Book {
 
 	@Override
 	public String toString() { //Ver desde donde se levanta. si es directo para el resutlado tiene que quedar solo el titulo
-		return "[Titulo=" + Titulo + ", Autor=" + Autor + ", Paginas=" + Paginas + ", Generos="
-				+ Arrays.toString(Generos) + "]";
+		return "[Titulo=" + Titulo + "]";
 	}
 	
 	

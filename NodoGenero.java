@@ -1,13 +1,14 @@
 package tpe;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class NodoGenero {
 
 	private NodoGenero hijoder;
 	private NodoGenero hijoizq;
 	private String genero;
-	private ArrayList<Book> libros; //Ver si el array es de libros o de string de titulos
+	private ArrayList<String> libros; //Ver si el array es de libros o de string de titulos
 
 	public NodoGenero(String genero) {
 		this.hijoder = null;
@@ -45,11 +46,11 @@ public class NodoGenero {
 		return genero + " ";
 	}
 
-	public ArrayList<Book> getLibros() {
+	public ArrayList<String> getLibros() {
 		return libros;
 	}
 
-	public void agregarLibro(Book b) { //Se puede agregar control de que el libro no esté ya cargado
+	public void agregarLibro(String b) { //Se puede agregar control de que el libro no esté ya cargado
 		this.libros.add(b);
 	}
 
