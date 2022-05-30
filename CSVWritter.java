@@ -12,7 +12,7 @@ public class CSVWritter {
 
 		BufferedWriter bw = null;
 		try {
-			File file = new File("C:/Users/maxi_/Documents/Sofi/PROGRAMACION 3/TPE/salida.csv");
+			File file = new File("C:/Users/maxi_/Documents/Sofi/PROGRAMACION_3/TPE/salida.csv");
 			if (!file.exists()) {
 				file.createNewFile();
 			}

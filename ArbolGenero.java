@@ -28,8 +28,7 @@ public class ArbolGenero {
 			if (nodo.getGenero().equals(genero)) {
 				return nodo;
 			} else if (nodo.getGenero().compareTo(genero) > 0)
-				return this.buscarGenero(nodo.getHijoizq(), genero); // Ver si anda, antes tenia return en esta linea y
-																		// en ln31
+				return this.buscarGenero(nodo.getHijoizq(), genero);																		
 			else
 				return this.buscarGenero(nodo.getHijoder(), genero);
 		}

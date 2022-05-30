@@ -1,6 +1,5 @@
 package tpe;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Index {
@@ -22,9 +21,7 @@ public class Index {
 				if (!arbol.hasElem(genero)) {
 					arbol.add(genero);
 				}
-//				ArrayList<String> titulo = new ArrayList<>();
 				String t = b.getTitulo();
-//				titulo.add(t);
 				arbol.buscarGenero(genero).agregarLibro(t);
 			}
 			// Busca los nodos de cada genero y agrega el titulo en cada uno x cada libro
