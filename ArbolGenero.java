@@ -17,12 +17,11 @@ public class ArbolGenero {
 	}
 
 	// Buscador por genero
-	public NodoGenero buscarGenero(String genero) {
-		return buscarGenero(this.root, genero);
-	}
+	public NodoGenero buscarGenero(String genero) { // Se puede crear un metodo parecido pero sin el add en el private
+		return buscarGenero(this.root, genero); // para que no puedan crear nodos con cualquier cosa desde afuera
+	} // al realizar las busquedas
 
 	private NodoGenero buscarGenero(NodoGenero nodo, String genero) {
-		NodoGenero AUX = new NodoGenero("");
 		if (nodo != null) {
 			if (nodo.getGenero().equals(genero)) {
 				return nodo;
@@ -31,42 +30,43 @@ public class ArbolGenero {
 			else
 				return this.buscarGenero(nodo.getHijoder(), genero);
 		}
-		this.add(genero);
-		return AUX;
+		NodoGenero aux = this.add(genero);
+		return aux;
 	}
 
 	// hasElem
-	public boolean hasElem(String genero) {
-		return this.hasElem(this.root, genero);
-	}
-
-	private boolean hasElem(NodoGenero nodo, String genero) {
-		if (nodo != null) {
-			if (nodo.getGenero() == genero)
-				return true;
-			else if (nodo.getGenero().compareTo(genero) > 0)
-				return this.hasElem(nodo.getHijoizq(), genero);
-			else
-				return this.hasElem(nodo.getHijoder(), genero);
-		}
-		return false;
-	}
+//	public boolean hasElem(String genero) {
+//		return this.hasElem(this.root, genero);
+//	}
+//
+//	private boolean hasElem(NodoGenero nodo, String genero) {
+//		if (nodo != null) {
+//			if (nodo.getGenero() == genero)
+//				return true;
+//			else if (nodo.getGenero().compareTo(genero) > 0)
+//				return this.hasElem(nodo.getHijoizq(), genero);
+//			else
+//				return this.hasElem(nodo.getHijoder(), genero);
+//		}
+//		return false;
+//	}
 
 	// isEmpty
-	public boolean isEmpty() {
-		return (this.root == null);
-	}
+//	public boolean isEmpty() {
+//		return (this.root == null);
+//	}
 
 	// add
-	public void add(String genero) {
+	public NodoGenero add(String genero) {
 		if (this.root == null) {
 			this.root = new NodoGenero(genero);
+			return this.root;
 		} else {
-			this.add(this.root, genero);
+			return this.add(this.root, genero);
 		}
 	}
 
-	private void add(NodoGenero nodo, String genero) {
+	private NodoGenero add(NodoGenero nodo, String genero) {
 		if (nodo.getGenero().compareTo(genero) > 0) { // Para chequear < o > porque suelo pifiarle
 			if (nodo.getHijoizq() == null) {
 				NodoGenero tmp = new NodoGenero(genero);
@@ -82,6 +82,7 @@ public class ArbolGenero {
 				this.add(nodo.getHijoder(), genero);
 			}
 		}
+		return nodo;
 	}
 
 	// void printPosOrder()

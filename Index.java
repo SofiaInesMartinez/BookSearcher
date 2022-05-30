@@ -29,8 +29,8 @@ public class Index {
 		return arbol.buscarGenero(genero);
 	}
 
-	public ArbolGenero getArbol() {
-		return arbol;
-	}
+//	public ArbolGenero getArbol() {
+//		return arbol;
+//	}
 
 }
