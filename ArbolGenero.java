@@ -18,7 +18,6 @@ public class ArbolGenero {
 
 	// Buscador por genero
 	public NodoGenero buscarGenero(String genero) {
-		
 		return buscarGenero(this.root, genero);
 	}
 
@@ -28,10 +27,11 @@ public class ArbolGenero {
 			if (nodo.getGenero().equals(genero)) {
 				return nodo;
 			} else if (nodo.getGenero().compareTo(genero) > 0)
-				return this.buscarGenero(nodo.getHijoizq(), genero);																		
+				return this.buscarGenero(nodo.getHijoizq(), genero);
 			else
 				return this.buscarGenero(nodo.getHijoder(), genero);
 		}
+		this.add(genero);
 		return AUX;
 	}
 

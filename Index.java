@@ -16,21 +16,11 @@ public class Index {
 		Iterator<Book> it = biblioteca.getLibros();
 		while (it.hasNext()) {
 			Book b = it.next();
-			String[] generos = b.getGeneros();
+			String[] generos = b.getGeneros(); //Por cada libro, busca el nodo correspondiente a cada genero y agrega ese libro.
 			for (String genero : generos) {
-				if (!arbol.hasElem(genero)) {
-					arbol.add(genero);
-				}
 				String t = b.getTitulo();
 				arbol.buscarGenero(genero).agregarLibro(t);
 			}
-			// Busca los nodos de cada genero y agrega el titulo en cada uno x cada libro
-			// Falta chequeo de si el nodo existe o lo crea
-			// Ver si esto se arma con los libros o solo con los titulos
-			// y dps tiene que agregar el libro en ese nodo. Podemos cambiar el metodo add
-			// para retorne el nodo en lugar de q sea void
-			// sino dps de crear el nodo hay q buscarlo para agregarle el libro no?
-
 		}
 		return arbol;
 	}
