@@ -29,4 +29,8 @@ public class Index {
 		return arbol.buscarGenero(genero);
 	}
 
+	public int getHeight() {
+		return this.arbol.getHeight();
+	}
+
 }

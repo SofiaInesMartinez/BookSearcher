@@ -2,6 +2,7 @@ package tpe;
 
 import java.util.ArrayList;
 
+
 public class ArbolGenero {
 	private NodoGenero root;
 
@@ -11,17 +12,19 @@ public class ArbolGenero {
 
 	//Buscador por genero para acceder desde el main
 	public NodoGenero buscarGenero(String genero) {
-		return buscarGenero(this.root, genero);
+		int contador = 1;
+		return buscarGenero(this.root, genero, contador);
 	}
 
-	private NodoGenero buscarGenero(NodoGenero nodo, String genero) {
+	private NodoGenero buscarGenero(NodoGenero nodo, String genero, int contador) {
 		if (nodo != null) {
 			if (nodo.getGenero().equals(genero)) {
+				System.out.println("Nodos recorridos en la búsqueda "+contador);
 				return nodo;
 			} else if (nodo.getGenero().compareTo(genero) > 0)
-				return this.buscarGenero(nodo.getHijoizq(), genero);
+				return this.buscarGenero(nodo.getHijoizq(), genero, contador+1);
 			else
-				return this.buscarGenero(nodo.getHijoder(), genero);
+				return this.buscarGenero(nodo.getHijoder(), genero, contador+1);
 		}
 		NodoGenero aux = new NodoGenero("Género no encontrado");
 		return aux;
@@ -93,6 +96,23 @@ public class ArbolGenero {
 			System.out.println("");
 			printInOrder(node.getHijoder());
 		}
+	}
+	
+	// getHeight
+
+	public int getHeight() {
+		int height = getHeight(this.root, 0, 0);
+		return height;
+	}
+
+	private int getHeight(NodoGenero nodo, int depth, int height) {
+		if (nodo != null) {
+			height = this.getHeight(nodo.getHijoizq(), depth + 1, height);
+			if (depth > height)
+				height = depth;
+			height = this.getHeight(nodo.getHijoder(), depth + 1, height);
+		}
+		return height;
 	}
 
 }
