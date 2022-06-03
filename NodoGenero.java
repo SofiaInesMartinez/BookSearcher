@@ -42,7 +42,7 @@ public class NodoGenero {
 
 	@Override
 	public String toString() {
-		return (genero + " Libros: " + libros.toString()) ;
+		return (genero + " Libros: " + libros.toString());
 	}
 
 	public ArrayList<String> getLibros() {
@@ -50,8 +50,7 @@ public class NodoGenero {
 	}
 
 	public void agregarLibro(String titulo) { // Se puede agregar control de que el libro no esté ya cargado
-		this.libros.add(titulo);				//Ver complejidad
+		this.libros.add(titulo); // Ver complejidad
 	}
 
-	
 }

@@ -12,7 +12,7 @@ public class CSVWritter {
 
 		BufferedWriter bw = null;
 		try {
-			File file = new File("C:/Users/maxi_/Documents/Sofi/PROGRAMACION_3/TPE/salida.csv");
+			File file = new File("C:\\Users\\Rodríguez\\OneDrive\\Documentos\\TUDAI\\ProgIII\\Trabajo\\salida.csv");
 			if (!file.exists()) {
 				file.createNewFile();
 			}
@@ -21,12 +21,12 @@ public class CSVWritter {
 			bw = new BufferedWriter(fw);
 
 			ArrayList<String> resultado = nodo.getLibros();
-			
-			//AGrego nombre del género como primera linea del archivo de salida
+
+			// AGrego nombre del género como primera linea del archivo de salida
 			String contenidoLinea0 = nodo.getGenero();
 			bw.write(contenidoLinea0);
 			bw.newLine();
-			
+
 			int i = 0;
 			while (i < resultado.size()) {
 				// Escribo cada linea del archivo salida

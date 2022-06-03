@@ -1,46 +1,43 @@
 package tpe;
 
-import ejer6.timer;
-
 public class TPEMain {
 
 	public static void main(String[] args) {
-		
+
 		String dataset1 = new String("C:/Users/maxi_/Documents/Sofi/PROGRAMACION_3/TPE/dataset1.csv");
 		String dataset2 = new String("C:/Users/maxi_/Documents/Sofi/PROGRAMACION_3/TPE/dataset2.csv");
 		String dataset3 = new String("C:/Users/maxi_/Documents/Sofi/PROGRAMACION_3/TPE/dataset3.csv");
 		String dataset4 = new String("C:/Users/maxi_/Documents/Sofi/PROGRAMACION_3/TPE/dataset4.csv");
-		
-//		System.out.println("Tiempo ejecucion con dataset1: " + calcularTiempoConDataset(dataset1));
-//		System.out.println("Tiempo ejecucion con dataset2: " + calcularTiempoConDataset(dataset2));
-//		System.out.println("Tiempo ejecucion con dataset3: " + calcularTiempoConDataset(dataset3));
-//		System.out.println("Tiempo ejecucion con dataset4: " + calcularTiempoConDataset(dataset4));
 
+		Index indice1 = crearIndice(dataset1);
+		Index indice2 = crearIndice(dataset2);
+		Index indice3 = crearIndice(dataset3);
+		Index indice4 = crearIndice(dataset4);
 		
-		CSVReader entrada = new CSVReader(dataset2);
+		System.out.println("Tiempo ejecucion con dataset1: " + calcularTiempoConDataset(indice1));
+		System.out.println("Tiempo ejecucion con dataset2: " + calcularTiempoConDataset(indice2));
+		System.out.println("Tiempo ejecucion con dataset3: " + calcularTiempoConDataset(indice3));
+		System.out.println("Tiempo ejecucion con dataset4: " + calcularTiempoConDataset(indice4));
 
-		Library biblioteca = entrada.obtenerBiblioteca();
-
-		Index indice = new Index(biblioteca);
-		indice.crearIndice();
-		
-		System.out.println("Tiempo de búsqueda " + calcularTiempoConDataset(indice, "ciencia"));
-		
-		System.out.println("Altura del árbol de búsqueda " + indice.getHeight());
-		
 	}
 
-	public static double calcularTiempoConDataset(Index indice, String genero) {
-		timer t = new timer();
+	public static Index crearIndice(String ruta) {
+		CSVReader entrada = new CSVReader(ruta);
+		Library biblioteca = entrada.obtenerBiblioteca();
+		Index indice = new Index(biblioteca);
+		indice.crearIndice();
+		return indice;
+	}
+
+	public static double calcularTiempoConDataset(Index indice) {
+		Timer t = new Timer();
 		t.start();
+		indice.busquedaPorGenero("humor");
+		return t.stop();
+	}
 
-		NodoGenero resultado = indice.busquedaPorGenero(genero);
-
-		double tiempo = t.stop();
-		
+	public void generarSalida(NodoGenero resultado) {
 		CSVWritter salida = new CSVWritter();
 		salida.generarSalida(resultado);
-
-		return tiempo;
 	}
 }

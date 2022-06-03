@@ -33,4 +33,8 @@ public class Index {
 		return this.arbol.getHeight();
 	}
 
+	public ArbolGenero getArbol() {
+		return arbol;
+	}
+
 }

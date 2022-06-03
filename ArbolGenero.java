@@ -2,7 +2,6 @@ package tpe;
 
 import java.util.ArrayList;
 
-
 public class ArbolGenero {
 	private NodoGenero root;
 
@@ -10,7 +9,7 @@ public class ArbolGenero {
 		this.root = null;
 	}
 
-	//Buscador por genero para acceder desde el main
+	// Buscador por genero para acceder desde el main
 	public NodoGenero buscarGenero(String genero) {
 		int contador = 1;
 		return buscarGenero(this.root, genero, contador);
@@ -19,20 +18,22 @@ public class ArbolGenero {
 	private NodoGenero buscarGenero(NodoGenero nodo, String genero, int contador) {
 		if (nodo != null) {
 			if (nodo.getGenero().equals(genero)) {
-				System.out.println("Nodos recorridos en la búsqueda "+contador);
+				System.out.println("Nodos recorridos en la búsqueda " + contador);
 				return nodo;
 			} else if (nodo.getGenero().compareTo(genero) > 0)
-				return this.buscarGenero(nodo.getHijoizq(), genero, contador+1);
+				return this.buscarGenero(nodo.getHijoizq(), genero, contador + 1);
 			else
-				return this.buscarGenero(nodo.getHijoder(), genero, contador+1);
+				return this.buscarGenero(nodo.getHijoder(), genero, contador + 1);
 		}
 		NodoGenero aux = new NodoGenero("Género no encontrado");
 		return aux;
 	}
 
-	//Buscador por genero para crear el indice. Ver si vale la pena ponerlos por separado o no.
-	//Este genera un nodo con el string ingresado si es que no lo encuentra, y lo agrega al arbol.
-	//No puede accederse desde el main a traves del indice.
+	// Buscador por genero para crear el indice. Ver si vale la pena ponerlos por
+	// separado o no.
+	// Este genera un nodo con el string ingresado si es que no lo encuentra, y lo
+	// agrega al arbol.
+	// No puede accederse desde el main a traves del indice.
 	protected NodoGenero buscarGeneroInterno(String genero) {
 		return buscarGeneroInterno(this.root, genero);
 	}
@@ -49,7 +50,7 @@ public class ArbolGenero {
 		NodoGenero aux = this.add(genero);
 		return aux;
 	}
-	
+
 	// add
 	public NodoGenero add(String genero) {
 		if (this.root == null) {
@@ -97,7 +98,7 @@ public class ArbolGenero {
 			printInOrder(node.getHijoder());
 		}
 	}
-	
+
 	// getHeight
 
 	public int getHeight() {

@@ -9,7 +9,7 @@ public class Library {
 	public Library() {
 		this.libros = new ArrayList<>();
 	}
-	
+
 	public void agregarLibro(Book b) {
 		libros.add(b);
 	}
@@ -22,5 +22,5 @@ public class Library {
 	public String toString() {
 		return "Library [libros=" + libros + "]";
 	}
-	
+
 }
