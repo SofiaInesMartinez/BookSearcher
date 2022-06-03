@@ -20,28 +20,24 @@ public class CSVReader {
 	public Library obtenerBiblioteca() {
 
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
-
+			br.readLine();
 			while ((line = br.readLine()) != null) {
 
 				String[] items = line.split(cvsSplitBy);
 
 				String titulo = items[0];
 				String autor = items[1];
-				String paginasStr = items[2];
-				// Integer paginas = Integer.valueOf(paginasStr); //Ver porque no deja parsear
-				// el string a int
-
+				Integer paginas = Integer.parseInt(items[2]);
 				String grupoGeneros = items[3];
 				String[] generos = grupoGeneros.split(generosSplitBy);
 
-				Book b = new Book(titulo, autor, paginasStr, generos);
+				Book b = new Book(titulo, autor, paginas, generos);
 				biblioteca.agregarLibro(b);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return biblioteca;
-
 	}
 
 }

@@ -20,8 +20,13 @@ public class CSVWritter {
 			FileWriter fw = new FileWriter(file);
 			bw = new BufferedWriter(fw);
 
-			ArrayList<Book> resultado = nodo.getLibros();
-
+			ArrayList<String> resultado = nodo.getLibros();
+			
+			//AGrego nombre del género como primera linea del archivo de salida
+			String contenidoLinea0 = nodo.getGenero();
+			bw.write(contenidoLinea0);
+			bw.newLine();
+			
 			int i = 0;
 			while (i < resultado.size()) {
 				// Escribo cada linea del archivo salida

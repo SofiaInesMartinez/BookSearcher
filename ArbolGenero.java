@@ -1,7 +1,7 @@
 package tpe;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 public class ArbolGenero {
 	private NodoGenero root;
@@ -10,75 +10,65 @@ public class ArbolGenero {
 		this.root = null;
 	}
 
-	public String getRoot() {
-		if (this.root != null)
-			return this.root.getGenero();
-		else
-			return null;
-	}
-
-	// Buscador por genero
+	//Buscador por genero para acceder desde el main
 	public NodoGenero buscarGenero(String genero) {
-		NodoGenero aux = new NodoGenero("");
-		if (this.hasElem(genero))
-			return this.buscarGenero(this.root, genero);
-		else
-			return aux;
+		int contador = 1;
+		return buscarGenero(this.root, genero, contador);
 	}
 
-	private NodoGenero buscarGenero(NodoGenero nodo, String genero) {
-		NodoGenero aux = null;
+	private NodoGenero buscarGenero(NodoGenero nodo, String genero, int contador) {
 		if (nodo != null) {
-			if (nodo.getGenero() == genero)
+			if (nodo.getGenero().equals(genero)) {
+				System.out.println("Nodos recorridos en la búsqueda "+contador);
 				return nodo;
-			else if (nodo.getGenero().compareTo(genero) > 0)
-				aux = this.buscarGenero(nodo.getHijoizq(), genero);  //Ver si anda, antes tenia return en esta linea y en ln31
+			} else if (nodo.getGenero().compareTo(genero) > 0)
+				return this.buscarGenero(nodo.getHijoizq(), genero, contador+1);
 			else
-				aux = this.buscarGenero(nodo.getHijoder(), genero);
+				return this.buscarGenero(nodo.getHijoder(), genero, contador+1);
 		}
+		NodoGenero aux = new NodoGenero("Género no encontrado");
 		return aux;
 	}
 
-	// hasElem
-	public boolean hasElem(String genero) {
-		return this.hasElem(this.root, genero);
+	//Buscador por genero para crear el indice. Ver si vale la pena ponerlos por separado o no.
+	//Este genera un nodo con el string ingresado si es que no lo encuentra, y lo agrega al arbol.
+	//No puede accederse desde el main a traves del indice.
+	protected NodoGenero buscarGeneroInterno(String genero) {
+		return buscarGeneroInterno(this.root, genero);
 	}
 
-	private boolean hasElem(NodoGenero nodo, String genero) {
+	private NodoGenero buscarGeneroInterno(NodoGenero nodo, String genero) {
 		if (nodo != null) {
-			if (nodo.getGenero() == genero)
-				return true;
-			else if (nodo.getGenero().compareTo(genero) > 0)
-				return this.hasElem(nodo.getHijoizq(), genero);
+			if (nodo.getGenero().equals(genero)) {
+				return nodo;
+			} else if (nodo.getGenero().compareTo(genero) > 0)
+				return this.buscarGeneroInterno(nodo.getHijoizq(), genero);
 			else
-				return this.hasElem(nodo.getHijoder(), genero);
+				return this.buscarGeneroInterno(nodo.getHijoder(), genero);
 		}
-		return false;
+		NodoGenero aux = this.add(genero);
+		return aux;
 	}
-
-	// isEmpty
-	public boolean isEmpty() {
-		return (this.root == null);
-	}
-
+	
 	// add
-	public void add(String genero) {
+	public NodoGenero add(String genero) {
 		if (this.root == null) {
 			this.root = new NodoGenero(genero);
+			return this.root;
 		} else {
-			this.add(this.root, genero);
+			return this.add(this.root, genero);
 		}
 	}
 
-	private void add(NodoGenero nodo, String genero) {
-		if (nodo.getGenero().compareTo(genero) > 0) { // Para chequear < o > porque suelo pifiarle
+	private NodoGenero add(NodoGenero nodo, String genero) {
+		if (nodo.getGenero().compareTo(genero) > 0) {
 			if (nodo.getHijoizq() == null) {
 				NodoGenero tmp = new NodoGenero(genero);
 				nodo.setHijoizq(tmp);
 			} else {
 				this.add(nodo.getHijoizq(), genero);
 			}
-		} else if (nodo.getGenero().compareTo(genero) < 0) { // Chequear signo del compareTo
+		} else if (nodo.getGenero().compareTo(genero) < 0) {
 			if (nodo.getHijoder() == null) {
 				NodoGenero tmp = new NodoGenero(genero);
 				nodo.setHijoder(tmp);
@@ -86,37 +76,7 @@ public class ArbolGenero {
 				this.add(nodo.getHijoder(), genero);
 			}
 		}
-	}
-
-
-	// void printPosOrder()
-
-	public void printPosOrder() {
-		this.printPosOrder(this.root);
-	}
-
-	private void printPosOrder(NodoGenero node) {
-		if (node != null) {
-			printPosOrder(node.getHijoizq());
-			printPosOrder(node.getHijoizq());
-			System.out.println(node);
-		}
-	}
-
-	// void printPreOrder()
-
-	public void printPreOrder() {
-		printPreOrder(this.root);
-	}
-
-	private void printPreOrder(NodoGenero node) {
-		if (node != null) {
-			System.out.println(node);
-			printPreOrder(node.getHijoizq());
-			printPreOrder(node.getHijoder());
-		} else {
-			System.out.println("- ");
-		}
+		return nodo;
 	}
 
 	// void printInOrder()
@@ -130,7 +90,7 @@ public class ArbolGenero {
 			printInOrder(node.getHijoizq());
 			System.out.print(node.getGenero() + " ");
 			ArrayList<String> libros = node.getLibros();
-			for (String libro: libros) {
+			for (String libro : libros) {
 				System.out.print(libro + " ");
 			}
 			System.out.println("");
@@ -138,5 +98,21 @@ public class ArbolGenero {
 		}
 	}
 	
-	
+	// getHeight
+
+	public int getHeight() {
+		int height = getHeight(this.root, 0, 0);
+		return height;
+	}
+
+	private int getHeight(NodoGenero nodo, int depth, int height) {
+		if (nodo != null) {
+			height = this.getHeight(nodo.getHijoizq(), depth + 1, height);
+			if (depth > height)
+				height = depth;
+			height = this.getHeight(nodo.getHijoder(), depth + 1, height);
+		}
+		return height;
+	}
+
 }
