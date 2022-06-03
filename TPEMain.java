@@ -14,10 +14,11 @@ public class TPEMain {
 		Index indice3 = crearIndice(dataset3);
 		Index indice4 = crearIndice(dataset4);
 		
-		System.out.println("Tiempo ejecucion con dataset1: " + calcularTiempoConDataset(indice1));
-		System.out.println("Tiempo ejecucion con dataset2: " + calcularTiempoConDataset(indice2));
-		System.out.println("Tiempo ejecucion con dataset3: " + calcularTiempoConDataset(indice3));
-		System.out.println("Tiempo ejecucion con dataset4: " + calcularTiempoConDataset(indice4));
+		System.out.println("Tiempo ejecucion con dataset1: " + calcularTiempoConIndice(indice1));
+		System.out.println("Tiempo ejecucion con dataset1: " + calcularTiempoConIndice(indice1));
+		System.out.println("Tiempo ejecucion con dataset2: " + calcularTiempoConIndice(indice2));
+		System.out.println("Tiempo ejecucion con dataset3: " + calcularTiempoConIndice(indice3));
+		System.out.println("Tiempo ejecucion con dataset4: " + calcularTiempoConIndice(indice4));
 
 	}
 
@@ -29,7 +30,7 @@ public class TPEMain {
 		return indice;
 	}
 
-	public static double calcularTiempoConDataset(Index indice) {
+	public static double calcularTiempoConIndice(Index indice) {
 		Timer t = new Timer();
 		t.start();
 		indice.busquedaPorGenero("humor");
