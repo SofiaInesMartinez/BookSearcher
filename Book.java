@@ -1,54 +1,53 @@
 package tpe;
 
-import java.util.Arrays;
-
 public class Book {
-	private String Titulo;
-	private String Autor;
-	private String Paginas; //Para cambiar cuando resolvamos el parseo en el REader
-	private String[] Generos;
-	
-		
-	public Book(String titulo, String autor, String paginas, String[] generos) {
-		super();
-		Titulo = titulo;
-		Autor = autor;
-		Paginas = paginas;
-		Generos = generos;
+	private String titulo;
+	private String autor;
+	private int paginas;
+	private String[] generos;
+
+	public Book(String titulo, String autor, Integer paginas, String[] generos) {
+		this.titulo = titulo;
+		this.autor = autor;
+		this.paginas = paginas;
+		this.generos = generos;
 	}
-	
+
 	public String getTitulo() {
-		return Titulo;
+		return titulo;
 	}
+
 	public void setTitulo(String titulo) {
-		Titulo = titulo;
+		this.titulo = titulo;
 	}
+
 	public String getAutor() {
-		return Autor;
+		return autor;
 	}
+
 	public void setAutor(String autor) {
-		Autor = autor;
+		this.autor = autor;
 	}
-//	public int getPaginas() {
-//		return Paginas;
-//	}
-//	public void setPaginas(int paginas) {
-//		Paginas = paginas;
-//	}
+
+	public int getPaginas() {
+		return this.paginas;
+	}
+
+	public void setPaginas(int paginas) {
+		this.paginas = paginas;
+	}
+
 	public String[] getGeneros() {
-		return Generos;
+		return generos;
 	}
+
 	public void setGeneros(String[] generos) {
-		Generos = generos;
+		this.generos = generos;
 	}
 
 	@Override
-	public String toString() { //Ver desde donde se levanta. si es directo para el resutlado tiene que quedar solo el titulo
-		return "[Titulo=" + Titulo + ", Autor=" + Autor + ", Paginas=" + Paginas + ", Generos="
-				+ Arrays.toString(Generos) + "]";
+	public String toString() {
+		return titulo;
 	}
-	
-	
 
-	
 }

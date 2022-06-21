@@ -8,11 +8,11 @@ import java.util.ArrayList;
 
 public class CSVWritter {
 
-	public void generarSalida(NodoGenero nodo) {
+	public void generarSalida(NodoGenero nodo, String rutaSalida) {
 
 		BufferedWriter bw = null;
 		try {
-			File file = new File("C:/Users/maxi_/Documents/Sofi/PROGRAMACION 3/TPE/salida.csv");
+			File file = new File(rutaSalida);
 			if (!file.exists()) {
 				file.createNewFile();
 			}
@@ -20,7 +20,12 @@ public class CSVWritter {
 			FileWriter fw = new FileWriter(file);
 			bw = new BufferedWriter(fw);
 
-			ArrayList<Book> resultado = nodo.getLibros();
+			ArrayList<String> resultado = nodo.getLibros();
+
+			// AGrego nombre del género como primera linea del archivo de salida
+			String contenidoLinea0 = nodo.getGenero();
+			bw.write(contenidoLinea0);
+			bw.newLine();
 
 			int i = 0;
 			while (i < resultado.size()) {
