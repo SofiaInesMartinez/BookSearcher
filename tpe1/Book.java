@@ -1,4 +1,4 @@
-package tpe;
+package tpe1;
 
 public class Book {
 	private String titulo;

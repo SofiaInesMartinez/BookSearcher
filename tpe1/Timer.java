@@ -1,4 +1,4 @@
-package tpe;
+package tpe1;
 
 /**
  * La clase Timer representa un temporizador que puede ser utilizado para controlar
