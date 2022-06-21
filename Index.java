@@ -20,7 +20,12 @@ public class Index {
 												// ese libro.
 			for (String genero : generos) {
 				String t = b.getTitulo();
-				arbol.buscarGeneroInterno(genero).agregarLibro(t);
+				if (arbol.buscarGeneroInterno(genero) == null) {
+					arbol.add(genero);
+					arbol.buscarGeneroInterno(genero).agregarLibro(t);
+				} else {
+					arbol.buscarGeneroInterno(genero).agregarLibro(t);
+				}
 			}
 		}
 	}

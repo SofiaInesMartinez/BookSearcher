@@ -8,11 +8,11 @@ import java.util.ArrayList;
 
 public class CSVWritter {
 
-	public void generarSalida(NodoGenero nodo) {
+	public void generarSalida(NodoGenero nodo, String rutaSalida) {
 
 		BufferedWriter bw = null;
 		try {
-			File file = new File("C:\\Users\\Rodríguez\\OneDrive\\Documentos\\TUDAI\\ProgIII\\Trabajo\\salida.csv");
+			File file = new File(rutaSalida);
 			if (!file.exists()) {
 				file.createNewFile();
 			}

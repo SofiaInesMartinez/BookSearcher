@@ -47,8 +47,7 @@ public class ArbolGenero {
 			else
 				return this.buscarGeneroInterno(nodo.getHijoder(), genero);
 		}
-		NodoGenero aux = this.add(genero);
-		return aux;
+		return null;
 	}
 
 	// add
