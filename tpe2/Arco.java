@@ -1,6 +1,6 @@
 package tpe2;
 
-public class Arco {
+public class Arco implements Comparable<Arco> {
 
 	private String verticeOrigen;
 	private String verticeDestino;
@@ -42,6 +42,11 @@ public class Arco {
 	@Override
 	public String toString() {
 		return "[" + verticeOrigen + " " + verticeDestino + " " + etiqueta + "]";
+	}
+
+	@Override
+	public int compareTo(Arco a) {
+		return a.getEtiqueta() - this.etiqueta;
 	}
 
 }
