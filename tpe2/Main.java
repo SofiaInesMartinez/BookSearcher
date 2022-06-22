@@ -4,9 +4,9 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		String dataset1 = new String("C:\\Users\\Rodríguez\\OneDrive\\Documentos\\TUDAI\\Datasets2daEtapa\\dataset1.csv");
+		String dataset2 = new String("C:\\Users\\Rodríguez\\OneDrive\\Documentos\\TUDAI\\Datasets2daEtapa\\dataset2.csv");
 
-		GrafoDirigido grafo1 = crearGrafo(dataset1);
+		GrafoDirigido grafo1 = crearGrafo(dataset2);
 		System.out.println(grafo1);
 
 		GenerosMasBuscadosDesdeA top = new GenerosMasBuscadosDesdeA(grafo1);
@@ -14,7 +14,9 @@ public class Main {
 		
 		SecuenciaAltoValor s = new SecuenciaAltoValor(grafo1);
 		System.out.println("Secuencia de mayor valor a partir de investigación " + s.obtenerSecuencia("investigación"));
-
+		
+		VinculacionCerrada v = new VinculacionCerrada(grafo1);
+		System.out.println("Vinculaciones cerradas de investigación " + v.getVinculaciones("investigación"));
 	}
 
 	public static GrafoDirigido crearGrafo(String ruta) {
