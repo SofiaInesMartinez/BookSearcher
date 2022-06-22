@@ -124,9 +124,15 @@ public class GrafoDirigido {
 		return arcos.iterator();
 	}
 
-	public Iterator<Arco> obtenerArcos(String verticeId) {
+	public Iterator<Arco> obtenerArcosIt(String verticeId) {
 		ArrayList<Arco> arcos = grafo.get(verticeId);
 		return arcos.iterator();
+	}
+	
+	
+	public ArrayList<Arco> obtenerArcos(String verticeId) {
+		ArrayList<Arco> arcos = grafo.get(verticeId);
+		return arcos;
 	}
 
 	@Override

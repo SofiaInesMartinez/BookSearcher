@@ -2,7 +2,6 @@ package tpe2;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 
 public class GenerosMasBuscadosDesdeA {
 	private GrafoDirigido grafo;
@@ -12,12 +11,7 @@ public class GenerosMasBuscadosDesdeA {
 	}
 
 	public ArrayList<String> obtenerAdyacentesTop(String verticeId, int ranking) {
-		Iterator<Arco> it = grafo.obtenerArcos(verticeId);
-		ArrayList<Arco> arcos = new ArrayList<>();
-		while (it.hasNext()) {
-			Arco a = it.next();
-			arcos.add(a);
-		}		
+		ArrayList<Arco> arcos = grafo.obtenerArcos(verticeId);	
 		ArrayList<String> adyacentes = new ArrayList<>();
 		if (arcos.size() >= ranking) {
 			Collections.sort(arcos);
