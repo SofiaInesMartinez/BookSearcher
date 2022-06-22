@@ -11,13 +11,15 @@ public class GenerosMasBuscadosDesdeA {
 	}
 
 	public ArrayList<String> obtenerAdyacentesTop(String verticeId, int ranking) {
-		ArrayList<Arco> arcos = grafo.obtenerArcos(verticeId);	
 		ArrayList<String> adyacentes = new ArrayList<>();
+		if(grafo.contieneVertice(verticeId)) {
+		ArrayList<Arco> arcos = grafo.obtenerArcos(verticeId);	
 		if (arcos.size() >= ranking) {
 			Collections.sort(arcos);
 			for (int i = 0; i <= ranking - 1; i++) {
 				adyacentes.add(arcos.get(i).getVerticeDestino());
 			}
+		}
 		}
 		return adyacentes;
 	}
