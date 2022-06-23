@@ -103,18 +103,6 @@ public class GrafoDirigido {
 		return adyacentes.iterator();
 	}
 
-//	public ArrayList<String> obtenerAdyacentesTop(String verticeId, int ranking) {
-//		ArrayList<Arco> arcos = grafo.get(verticeId);
-//		ArrayList<String> adyacentes = new ArrayList<>();
-//		if (arcos.size() >= ranking) {
-//			Collections.sort(arcos);
-//			for (int i = 0; i <= ranking - 1; i++) {
-//				adyacentes.add(arcos.get(i).getVerticeDestino());
-//			}
-//		}
-//		return adyacentes;
-//	}
-
 	public Iterator<Arco> obtenerArcos() {
 		ArrayList<Arco> arcos = new ArrayList<>();
 		for (String v : grafo.keySet()) {
