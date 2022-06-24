@@ -1,65 +1,73 @@
 package tpe2;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 
 public class GrafoGenerosVinculados {
 	private GrafoDirigido grafo;
 	private HashSet<Arco> visitados;
 	private HashSet<String> afines;
-	private GrafoDirigido solucion;
-	private String origen;
-	
+	private ArrayList<ArrayList<Arco>> solucion;
+
 	public GrafoGenerosVinculados(GrafoDirigido grafo) {
 		super();
 		this.grafo = grafo;
 		this.visitados = new HashSet<>();
 		this.afines = new HashSet<>();
-		this.solucion = null;
-		this.origen = "";
-	}
-	
-	public void setOrigen(String origen) {
-		this.origen = origen;
+		this.solucion = new ArrayList<>();
 	}
 
-	public GrafoDirigido getGenerosVinculados(String origen) {
+	public ArrayList<ArrayList<Arco>> getGenerosVinculados(String origen) { // dps hay que cambiar a retornar grafo
 		visitados.clear();
 		afines.clear();
-		this.setOrigen(origen);
-		solucion = vinculados_visit(origen);
-		return solucion;
-	}
-	
-	private GrafoDirigido vinculados_visit(String vertice) {
-		ArrayList<Arco> arcos = grafo.obtenerArcos(vertice);
-		ArrayList<Arco> aux = new ArrayList<Arco>();
+		ArrayList<Arco> arcos = grafo.obtenerArcos(origen); // recorremos desde los arcos que salen de origen
+		ArrayList<Arco> camino = new ArrayList<>(); // por ahora armamos camino de arcos, dps pasamos a grafo
 		int i = 0;
-		while (i < arcos.size()) {
-			visitados.add(arcos.get(i));
-			String adyacente = arcos.get(i).getVerticeDestino();
-			vinculados_visit(adyacente);
-			if (adyacente.equals(origen)) {
-				aux.add(grafo.obtenerArco(vertice, adyacente));
-			}
-			if(colores.get(adyacente).equals("blanco")) {
-				encontre = dfs_visit2(adyacente); 
-				
-				if(encontre) {
-					//System.out.println(vertice);
-					System.out.println(adyacente);
+		if (arcos != null) {
+			while (i < arcos.size()) {
+				Arco arcoId = arcos.get(i);
+				camino.add(arcoId);
+				if (!visitados.contains(arcoId)) {
+					vinculados_visit(arcoId, origen, camino);
 				}
-			}else if(colores.get(adyacente).equals("amarillo")) {
-				System.out.println(adyacente);
-				encontre = true;
+				i++;
 			}
-			i++;
 		}
-		//System.out.println(vertice);
-		colores.put(vertice, "negro");
-		
-		return new GrafoDirigido();
+		return solucion;
+
 	}
+
+	private void vinculados_visit(Arco arcoId, String destino, ArrayList<Arco> camino) {
+		this.visitados.add(arcoId); // Si llega a un arco afin sabemos que llega a destino
+		if (arcoId.getVerticeDestino().equals(destino) || afines.contains(arcoId.getVerticeDestino())) {
+			ArrayList<Arco> nuevoCamino = new ArrayList<>();
+			nuevoCamino.addAll(camino);
+			solucion.add(nuevoCamino);
+			for (Arco a : camino) {
+				String vertice = a.getVerticeOrigen();
+				afines.add(vertice);
+			}
+			camino.clear();
+		} else {
+			String vertice = arcoId.getVerticeDestino(); // levantamos el vertice al que apunta el arco
+			if (!afines.contains(vertice)) { // Si el vertice es afin no lo recorremos para evitar
+												// bucles.
+				ArrayList<Arco> arcosSiguientes = grafo.obtenerArcos(vertice); // recorremos todos los arcos que salen
+																				// de ese vertice
+				int i = 0;
+				while (i < arcosSiguientes.size()) {
+					if (!this.visitados.contains(arcosSiguientes.get(i))) {
+						camino.add(arcosSiguientes.get(i));
+						vinculados_visit(arcosSiguientes.get(i), destino, camino);
+						if (camino.size() > 0) { //tb puede ser que sea !isEmpty()
+							camino.remove(camino.size() - 1);
+						}
+					}
+					i++;
+				}
+			}
+		}
+		visitados.remove(arcoId);
+	}
+
 }
