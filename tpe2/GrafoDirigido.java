@@ -103,7 +103,7 @@ public class GrafoDirigido {
 		return adyacentes.iterator();
 	}
 
-	public Iterator<Arco> obtenerArcos() {
+	public Iterator<Arco> obtenerArcos() { // todos los arcos del grafo
 		ArrayList<Arco> arcos = new ArrayList<>();
 		for (String v : grafo.keySet()) {
 			arcos.addAll(grafo.get(v));
@@ -111,15 +111,12 @@ public class GrafoDirigido {
 		return arcos.iterator();
 	}
 
-	public Iterator<Arco> obtenerArcosIt(String verticeId) {
-		ArrayList<Arco> arcos = grafo.get(verticeId);
-		return arcos.iterator();
-	}
-	
-	
 	public ArrayList<Arco> obtenerArcos(String verticeId) {
-		ArrayList<Arco> arcos = grafo.get(verticeId);
-		return arcos;
+		return grafo.get(verticeId);
+	}
+
+	public Iterator<Arco> obtenerArcosIt(String verticeId) {
+		return grafo.get(verticeId).iterator();
 	}
 
 	@Override

@@ -4,17 +4,18 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		String dataset2 = new String("C:\\Users\\Rodríguez\\OneDrive\\Documentos\\TUDAI\\Datasets2daEtapa\\dataset2.csv");
+		String dataset2 = new String("C:\\Users\\maxi_\\Documents\\Sofi\\PROGRAMACION_3\\TPE\\dataset1.csv");
 
 		GrafoDirigido grafo1 = crearGrafo(dataset2);
 		System.out.println(grafo1);
 
 		GenerosMasBuscadosDesdeA top = new GenerosMasBuscadosDesdeA(grafo1);
-		System.out.println("Los 6 géneros más buscados luego de investigación " + top.obtenerAdyacentesTop("investigación", 6));
-		
+		System.out.println(
+				"Los 6 géneros más buscados luego de investigación " + top.obtenerAdyacentesTop("investigación", 6));
+
 		SecuenciaAltoValor s = new SecuenciaAltoValor(grafo1);
 		System.out.println("Secuencia de mayor valor a partir de investigación " + s.obtenerSecuencia("investigación"));
-		
+
 		GrafoDirigido grafo2 = new GrafoDirigido();
 		grafo2.agregarVertice("A");
 		grafo2.agregarVertice("B");
@@ -31,8 +32,13 @@ public class Main {
 		grafo2.agregarArco("C", "D");
 		grafo2.agregarArco("D", "B");
 		grafo2.agregarArco("E", "A");
-		GrafoGenerosVinculados grafo3 = new GrafoGenerosVinculados(grafo2);
-		System.out.println("Vinculaciones cerradas de investigación " + grafo3.getGenerosVinculados("investigación"));
+
+//		GrafoGenerosVinculados grafo3 = new GrafoGenerosVinculados(grafo2);
+//		System.out.println("Vinculaciones cerradas de investigación " + grafo3.getGenerosVinculados("investigación"));
+
+		GrafoGenerosVinculados vinculados = new GrafoGenerosVinculados(grafo2);
+		System.out.println("solucion " + vinculados.getGenerosVinculados("A"));
+
 	}
 
 	public static GrafoDirigido crearGrafo(String ruta) {
