@@ -50,7 +50,7 @@ public class GrafoGenerosVinculados {
 			camino.clear();
 		} else {
 			String vertice = arcoId.getVerticeDestino(); // levantamos el vertice al que apunta el arco
-			if (!afines.contains(vertice)) { // Si el vertice es afin no lo recorremos para evitar
+			if (!afines.contains(vertice)) { // Esto es para revisar. Si el vertice es afin no lo recorremos para evitar
 												// bucles.
 				ArrayList<Arco> arcosSiguientes = grafo.obtenerArcos(vertice); // recorremos todos los arcos que salen
 																				// de ese vertice
@@ -59,7 +59,7 @@ public class GrafoGenerosVinculados {
 					if (!this.visitados.contains(arcosSiguientes.get(i))) {
 						camino.add(arcosSiguientes.get(i));
 						vinculados_visit(arcosSiguientes.get(i), destino, camino);
-						if (camino.size() > 0) { //tb puede ser que sea !isEmpty()
+						if (camino.size() > 0) {
 							camino.remove(camino.size() - 1);
 						}
 					}
