@@ -7,21 +7,21 @@ public class GrafoGenerosVinculados {
 	private GrafoDirigido grafo;
 	private HashSet<Arco> visitados;
 	private HashSet<String> afines;
-	private ArrayList<ArrayList<Arco>> solucion;
+	private GrafoDirigido solucion;
 
 	public GrafoGenerosVinculados(GrafoDirigido grafo) {
 		super();
 		this.grafo = grafo;
 		this.visitados = new HashSet<>();
 		this.afines = new HashSet<>();
-		this.solucion = new ArrayList<>();
+		this.solucion = new GrafoDirigido();
 	}
 
-	public ArrayList<ArrayList<Arco>> getGenerosVinculados(String origen) { // dps hay que cambiar a retornar grafo
+	public GrafoDirigido getGenerosVinculados(String origen) {
 		visitados.clear();
 		afines.clear();
 		ArrayList<Arco> arcos = grafo.obtenerArcos(origen); // recorremos desde los arcos que salen de origen
-		ArrayList<Arco> camino = new ArrayList<>(); // por ahora armamos camino de arcos, dps pasamos a grafo
+		ArrayList<Arco> camino = new ArrayList<>();
 		int i = 0;
 		if (arcos != null) {
 			while (i < arcos.size()) {
@@ -42,7 +42,7 @@ public class GrafoGenerosVinculados {
 		if (arcoId.getVerticeDestino().equals(destino) || afines.contains(arcoId.getVerticeDestino())) {
 			ArrayList<Arco> nuevoCamino = new ArrayList<>();
 			nuevoCamino.addAll(camino);
-			solucion.add(nuevoCamino);
+			agregarASolucion(nuevoCamino);
 			for (Arco a : camino) {
 				String vertice = a.getVerticeOrigen();
 				afines.add(vertice);
@@ -50,7 +50,7 @@ public class GrafoGenerosVinculados {
 			camino.clear();
 		} else {
 			String vertice = arcoId.getVerticeDestino(); // levantamos el vertice al que apunta el arco
-			if (!afines.contains(vertice)) { // Esto es para revisar. Si el vertice es afin no lo recorremos para evitar
+			if (!afines.contains(vertice)) { //Si el vertice es afin no lo recorremos para evitar
 												// bucles.
 				ArrayList<Arco> arcosSiguientes = grafo.obtenerArcos(vertice); // recorremos todos los arcos que salen
 																				// de ese vertice
@@ -68,6 +68,21 @@ public class GrafoGenerosVinculados {
 			}
 		}
 		visitados.remove(arcoId);
+	}
+	
+	
+	private void agregarASolucion(ArrayList<Arco> lista) {
+		for(Arco a:lista) {
+			String origen = a.getVerticeOrigen();
+			String destino = a.getVerticeDestino();
+			if(!solucion.contieneVertice(origen)){
+				solucion.agregarVertice(origen);				
+			}
+			if(!solucion.contieneVertice(destino)){
+				solucion.agregarVertice(destino);				
+			}
+			solucion.agregarArco(origen, destino);
+		}
 	}
 
 }

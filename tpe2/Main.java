@@ -4,9 +4,13 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		String dataset2 = new String("C:\\Users\\maxi_\\Documents\\Sofi\\PROGRAMACION_3\\TPE\\dataset1.csv");
+		String dataset1 = new String("C:\\Users\\maxi_\\Documents\\Sofi\\PROGRAMACION_3\\TPE\\dataset1.csv");
+		String dataset2 = new String("C:\\Users\\maxi_\\Documents\\Sofi\\PROGRAMACION_3\\TPE\\dataset2.csv");
+		String dataset3 = new String("C:\\Users\\maxi_\\Documents\\Sofi\\PROGRAMACION_3\\TPE\\dataset3.csv");
 
-		GrafoDirigido grafo1 = crearGrafo(dataset2);
+		GrafoDirigido grafo1 = crearGrafo(dataset1);
+		GrafoDirigido grafo2 = crearGrafo(dataset2);
+		GrafoDirigido grafo3 = crearGrafo(dataset3);
 		System.out.println(grafo1);
 
 		GenerosMasBuscadosDesdeA top = new GenerosMasBuscadosDesdeA(grafo1);
@@ -16,28 +20,26 @@ public class Main {
 		SecuenciaAltoValor s = new SecuenciaAltoValor(grafo1);
 		System.out.println("Secuencia de mayor valor a partir de investigación " + s.obtenerSecuencia("investigación"));
 
-		GrafoDirigido grafo2 = new GrafoDirigido();
-		grafo2.agregarVertice("A");
-		grafo2.agregarVertice("B");
-		grafo2.agregarVertice("C");
-		grafo2.agregarVertice("D");
-		grafo2.agregarVertice("E");
-		grafo2.agregarVertice("F");
-		grafo2.agregarVertice("G");
-		grafo2.agregarArco("A", "B");
-		grafo2.agregarArco("A", "G");
-		grafo2.agregarArco("B", "E");
-		grafo2.agregarArco("B", "F");
-		grafo2.agregarArco("B", "C");
-		grafo2.agregarArco("C", "D");
-		grafo2.agregarArco("D", "B");
-		grafo2.agregarArco("E", "A");
-
-//		GrafoGenerosVinculados grafo3 = new GrafoGenerosVinculados(grafo2);
-//		System.out.println("Vinculaciones cerradas de investigación " + grafo3.getGenerosVinculados("investigación"));
+		GrafoDirigido grafo4 = new GrafoDirigido();
+		grafo4.agregarVertice("A");
+		grafo4.agregarVertice("B");
+		grafo4.agregarVertice("C");
+		grafo4.agregarVertice("D");
+		grafo4.agregarVertice("E");
+		grafo4.agregarVertice("F");
+		grafo4.agregarVertice("G");
+		grafo4.agregarArco("A", "B");
+		grafo4.agregarArco("A", "G");
+		grafo4.agregarArco("B", "E");
+		grafo4.agregarArco("B", "F");
+		grafo4.agregarArco("B", "C");
+		grafo4.agregarArco("C", "D");
+		grafo4.agregarArco("D", "B");
+		grafo4.agregarArco("E", "A");
 
 		GrafoGenerosVinculados vinculados = new GrafoGenerosVinculados(grafo2);
-		System.out.println("solucion " + vinculados.getGenerosVinculados("A"));
+		System.out.println("solucion " + vinculados.getGenerosVinculados("investigación"));
+		
 
 	}
 

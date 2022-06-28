@@ -41,7 +41,7 @@ public class Arco implements Comparable<Arco> {
 
 	@Override
 	public String toString() {
-		return "[" + verticeOrigen + " " + verticeDestino + " " + etiqueta + "]";
+		return verticeOrigen + " -> " + verticeDestino + " [label = " + etiqueta + "]";
 	}
 
 	@Override
