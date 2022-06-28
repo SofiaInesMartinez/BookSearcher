@@ -8,9 +8,12 @@ public class Main {
 		String dataset2 = new String("C:\\Users\\maxi_\\Documents\\Sofi\\PROGRAMACION_3\\TPE\\dataset2.csv");
 		String dataset3 = new String("C:\\Users\\maxi_\\Documents\\Sofi\\PROGRAMACION_3\\TPE\\dataset3.csv");
 
+		String dataset4 = new String("C:\\Users\\maxi_\\Documents\\Sofi\\PROGRAMACION_3\\TPE\\dataset4.csv");
+
 		GrafoDirigido grafo1 = crearGrafo(dataset1);
 		GrafoDirigido grafo2 = crearGrafo(dataset2);
 		GrafoDirigido grafo3 = crearGrafo(dataset3);
+		GrafoDirigido grafo5 = crearGrafo(dataset4);
 		System.out.println(grafo1);
 
 		GenerosMasBuscadosDesdeA top = new GenerosMasBuscadosDesdeA(grafo1);
@@ -37,7 +40,7 @@ public class Main {
 		grafo4.agregarArco("D", "B");
 		grafo4.agregarArco("E", "A");
 
-		GrafoGenerosVinculados vinculados = new GrafoGenerosVinculados(grafo2);
+		GrafoGenerosVinculados vinculados = new GrafoGenerosVinculados(grafo5);
 		System.out.println("solucion " + vinculados.getGenerosVinculados("investigación"));
 		
 

@@ -3,7 +3,6 @@ package tpe2;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Set;
 
 public class GrafoDirigido {
 
@@ -15,10 +14,6 @@ public class GrafoDirigido {
 
 	public void agregarVertice(String verticeId) {
 		this.grafo.put(verticeId, new ArrayList<>());
-	}
-
-	public void borrarVertice(String verticeId) {
-		this.grafo.remove(verticeId);
 	}
 
 	public void agregarArco(String verticeId1, String verticeId2) {
@@ -34,20 +29,6 @@ public class GrafoDirigido {
 		}
 	}
 
-	public void borrarArco(String verticeId1, String verticeId2) {
-		int i = 0;
-		if (this.contieneVertice(verticeId1) && this.contieneVertice(verticeId2)) {
-			ArrayList<Arco> arcos = grafo.get(verticeId1);
-			boolean encontre = false;
-			while (i < arcos.size() && encontre == false) {
-				if (arcos.get(i).getVerticeDestino().equals(verticeId2)) {
-					arcos.remove(i);
-					encontre = true;
-				}
-				i++;
-			}
-		}
-	}
 
 	public boolean contieneVertice(String verticeId) {
 		return this.grafo.containsKey(verticeId);
@@ -77,23 +58,6 @@ public class GrafoDirigido {
 		return null;
 	}
 
-	public int cantidadVertices() {
-		return grafo.size();
-	}
-
-	public int cantidadArcos() {
-		int contador = 0;
-		for (String v : grafo.keySet()) {
-			contador += grafo.get(v).size();
-		}
-		return contador;
-	}
-
-	public Iterator<String> obtenerVertices() {
-		Set<String> vertices = grafo.keySet();
-		return vertices.iterator();
-	}
-
 	public Iterator<String> obtenerAdyacentes(String verticeId) {
 		ArrayList<Arco> arcos = grafo.get(verticeId);
 		ArrayList<String> adyacentes = new ArrayList<>();
@@ -101,14 +65,6 @@ public class GrafoDirigido {
 			adyacentes.add(a.getVerticeDestino());
 		}
 		return adyacentes.iterator();
-	}
-
-	public Iterator<Arco> obtenerArcos() { // todos los arcos del grafo
-		ArrayList<Arco> arcos = new ArrayList<>();
-		for (String v : grafo.keySet()) {
-			arcos.addAll(grafo.get(v));
-		}
-		return arcos.iterator();
 	}
 
 	public ArrayList<Arco> obtenerArcos(String verticeId) {
@@ -121,7 +77,7 @@ public class GrafoDirigido {
 
 	@Override
 	public String toString() {
-		return "GrafoDirigido [grafo=" + grafo + "]";
+		return "GrafoDirigido [grafoDirigido = " + grafo + "]";
 	}
 
 }
