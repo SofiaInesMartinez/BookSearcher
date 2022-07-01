@@ -30,6 +30,7 @@ public class GrafoGenerosVinculados {
 				if (!visitados.contains(arcoId)) {
 					vinculados_visit(arcoId, origen, camino);
 				}
+				camino.clear();
 				i++;
 			}
 		}

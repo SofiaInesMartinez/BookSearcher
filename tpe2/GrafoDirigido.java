@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+
 public class GrafoDirigido {
 
 	private HashMap<String, ArrayList<Arco>> grafo;
@@ -75,6 +76,27 @@ public class GrafoDirigido {
 		return grafo.get(verticeId).iterator();
 	}
 
+	public Iterator<Arco> obtenerArcos() {
+		ArrayList<Arco> arcos = new ArrayList<>();
+		for (String v : grafo.keySet()) {
+			arcos.addAll(grafo.get(v));
+		}
+		return arcos.iterator();
+	}
+	
+
+	public int cantidadVertices() {
+		return grafo.size();
+	}
+
+	public int cantidadArcos() {
+		int contador = 0;
+		for (String v : grafo.keySet()) {
+			contador += grafo.get(v).size();
+		}
+		return contador;
+	}
+	
 	@Override
 	public String toString() {
 		return "GrafoDirigido [grafoDirigido = " + grafo + "]";

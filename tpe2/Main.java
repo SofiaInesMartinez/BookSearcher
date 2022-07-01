@@ -1,5 +1,6 @@
 package tpe2;
 
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -44,8 +45,9 @@ public class Main {
 
 		GrafoGenerosVinculados vinculados = new GrafoGenerosVinculados(grafo1);
 
-		System.out.println("solucion " + vinculados.getGenerosVinculados("investigación"));
+		//generarSalida(vinculados.getGenerosVinculados("B"));
 		
+		generarSalida(vinculados.getGenerosVinculados("investigación"));
 
 	}
 
@@ -53,5 +55,11 @@ public class Main {
 		CSVReader2 entrada = new CSVReader2(ruta);
 		GrafoDirigido g = entrada.obtenerGrafo();
 		return g;
+	}
+	
+	public static void generarSalida(GrafoDirigido resultado) {
+		CSVWritter2 salida = new CSVWritter2();
+		String rutaSalida = "C:\\Users\\maxi_\\Documents\\Sofi\\PROGRAMACION_3\\TPE\\salida.csv";
+		salida.generarSalida(resultado, rutaSalida);
 	}
 }
