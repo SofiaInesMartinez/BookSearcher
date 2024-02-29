@@ -1,6 +1,6 @@
 #graph #bst #binarytreesearch
 
-# Aim
+Aim
 Starting from a collection of books, we want to implement a tool that allows us to simplify the search for books by genre; in addition to characterizing the behavior of users while performing said searches.
 Each book is made up of a title, an author, a number of pages and a set of genres, which describe the content of the book. Examples of these genres are art, science, police, among others.
 
